@@ -7,13 +7,14 @@ let score = document.querySelector(".score")
 
 let pround = 0;
 let cround = 0;
-let runCount = 0;
+let runCount = 1;
 let userChoice = "asd";
 
 
 rock.addEventListener("click",() =>
 {
     userChoice = "rock";
+    check();
     game();
     runCount +=1
     
@@ -22,6 +23,7 @@ rock.addEventListener("click",() =>
 paper.addEventListener("click",() =>
 {
     userChoice = "paper";
+    check();
     game();
     runCount +=1
 })
@@ -29,6 +31,7 @@ paper.addEventListener("click",() =>
 scissors.addEventListener("click",() =>
 {
     userChoice = "scissors";
+    check();
     game();
     runCount +=1
 })
@@ -74,7 +77,7 @@ function game()
      comPick = choices[Math.floor(Math.random()*3)];
      userPick = userChoice;
 
-     let text = `You picked ${userPick} computer picked ${comPick}`;
+     let text = `You picked: ${userPick}, computer picked: ${comPick}`;
      let winnerText = (rpc(userPick, comPick));
      let scoreText = `You: ${pround} Computer: ${cround}`;
      picktext.textContent = text;
@@ -85,12 +88,13 @@ function game()
 
 }
 
-
-if (runCount = 5)
+function check()
 {
+if (runCount == 6)
+{
+    runCount = 1;
     pround = 0;
     cround = 0;
-    runCount = 0;
     if(pround == cround)
     {
         winner.textContent = "Tie";
@@ -99,9 +103,12 @@ if (runCount = 5)
     else if(pround > cround)
     {
         winner.textContent = "You Won";
+        score.style.cssText = "background-color: green;"
     }
     if(pround < cround)
     {
         winner.textContent = "You Lose";
+        score.style.cssText = "background-color: red;"
     }
+}
 }
